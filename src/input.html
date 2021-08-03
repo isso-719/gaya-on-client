@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/input.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="first_display">
+        <form>
+            <img class="logo" src="img/logo-color.svg" alt="logo">
+            <h1>Gaya On!</h1>
+            <h3>ルームIDを入力</h3>
+            <p class="error" style="display: none; color: red;"></p>
+            <input name="room_id" type="text" placeholder="1234">
+            <button type="submit">接続する</button>
+            <p class="room_link">
+                ルーム作成は<a onClick="const { shell } = require('electron'); shell.openExternal('https://www.google.com/');">こちら</a>
+            </p>
+        </form>
+    </div>
+
+    <script>
+        const electron = require('electron');
+        const { ipcRenderer } = electron;
+
+        function checkRoom(id) {
+
+        }
+
+        document.querySelector('form').addEventListener('submit', (event) => {
+            document.querySelector('.error').style.display = "none";
+
+            event.preventDefault();
+            const { value } = document.querySelector('input');
+
+            url = "https://3fccd6fc3a77.ngrok.io/" + value + "/res"
+            var result = false
+            fetch(url)
+            .then(function (data) {
+                return data.json();
+            })
+            .then(function (json) {
+                if (json["status"] === "success"){
+                    ipcRenderer.send('mainWindow:create', value);
+                } else {
+                    document.querySelector('.error').innerHTML = "RoomIDが無効です";
+                    document.querySelector('.error').style.display = "block";
+                }
+            })
+            .catch(error => {
+                document.querySelector('.error').innerHTML = "サーバに接続できません";
+                document.querySelector('.error').style.display = "block";
+            });
+        });
+    </script>
+</body>
+</html>
