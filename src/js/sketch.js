@@ -2,7 +2,7 @@ const electron = require('electron');
 const { ipcRenderer } = electron;
 
 ipcRenderer.on('mainWindow:create', (event, id) => {
-    url = "https://3fccd6fc3a77.ngrok.io/" + id + "/res";
+    url = "https://lab.gaya-on.com/" + id + "/res";
     numbers = reset();
     setInterval("draw()", 100);
 });

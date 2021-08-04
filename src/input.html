@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/input.css">
-    <title>Document</title>
+    <title>Gaya On! Start Screen</title>
 </head>
 <body>
     <div id="first_display">
@@ -26,17 +26,13 @@
         const electron = require('electron');
         const { ipcRenderer } = electron;
 
-        function checkRoom(id) {
-
-        }
-
         document.querySelector('form').addEventListener('submit', (event) => {
             document.querySelector('.error').style.display = "none";
 
             event.preventDefault();
             const { value } = document.querySelector('input');
 
-            url = "https://3fccd6fc3a77.ngrok.io/" + value + "/res"
+            url = "https://lab.gaya-on.com/" + value + "/res"
             var result = false
             fetch(url)
             .then(function (data) {

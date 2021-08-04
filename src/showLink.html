@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaya On! Show Room Link</title>
+    <script>
+        window.jQuery = window.$ = require('jquery');
+    </script>
+    <script src="js/qr.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/showLink.css">
+</head>
+<body>
+    <h1>Your Room's Link</h1>
+    <div id="qrcode"></div>
+    <p id="url"></p>
+
+    <script>
+        const electron = require('electron');
+        const { ipcRenderer } = electron;
+
+        ipcRenderer.on('linkWindow:create', (event, id) => {
+            $('#qrcode').qrcode({width: 256, height: 256, text: "https://lab.gaya-on.com/room/" + id});
+            $('#url').text("https://lab.gaya-on.com/room/" + id);
+        });
+    </script>
+</body>
+</html>
