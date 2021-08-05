@@ -1,8 +1,9 @@
 // electronモジュールを読み込み
 const electron = require('electron')
-const jQuery = require('jquery')
 const { app, BrowserWindow, ipcMain, Tray, Menu, clipboard} = electron;
 const is_mac = process.platform==='darwin'
+
+app.disableHardwareAcceleration()
 
 if(is_mac) {
   app.dock.hide()
