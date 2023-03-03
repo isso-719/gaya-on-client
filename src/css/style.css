@@ -35,12 +35,8 @@ body {
         transform:translate(0, 0) ;
         opacity: 1;
     }
-    90% {
-        opacity: 1;
-    }
     100% {
         transform:translate(calc(-100vw - 110%), 0);
-        opacity: 0;
     }
 }
 
