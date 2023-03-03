@@ -19,6 +19,7 @@ body {
 
 #first_display form {
     text-align: center;
+    -webkit-app-region: no-drag;
 }
 
 input[type='text'] {

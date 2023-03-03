@@ -14,8 +14,11 @@
             <h1>Gaya On!</h1>
             <h3>ルームIDを入力</h3>
             <p class="error" style="display: none; color: red;"></p>
-            <input name="room_id" type="text" placeholder="123456">
+            <input id="room_address" name="room_address" type="text" value="https://api.gaya-on.com">
+            <input id="room_id" name="room_id" type="text" placeholder="123456">
+            <br><br>
             <button type="submit">接続する</button>
+            <br>
             <p class="room_link">
                 ルーム作成は<a onClick="const { shell } = require('electron'); shell.openExternal('https://www.google.com/');">こちら</a>
             </p>
@@ -30,24 +33,38 @@
             document.querySelector('.error').style.display = "none";
 
             event.preventDefault();
-            const { value } = document.querySelector('input');
 
-            url = "https://lab.gaya-on.com/" + value + "/res"
-            var result = false
-            fetch(url)
-            .then(function (data) {
-                return data.json();
-            })
-            .then(function (json) {
-                if (json["status"] === "success"){
-                    ipcRenderer.send('mainWindow:create', value);
-                } else {
-                    document.querySelector('.error').innerHTML = "RoomIDが無効です";
+            const server_address = document.querySelector('#room_address').value;
+            const room_token = document.querySelector('#room_id').value;
+
+            let room_find_url = server_address + "/v1/room/find";
+
+            let ws_url;
+            // https で始まれば wss に変換, http で始まれば ws に変換
+            if (server_address.startsWith("https")) {
+                ws_url = "wss" + server_address.slice(5) + "/v1/room/join/" + room_token
+            } else {
+                ws_url = "ws" + server_address.slice(4) + "/v1/room/join/" + room_token
+            }
+
+            // Find Room
+            fetch(room_find_url, {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ token: room_token }),
+            }).then((res) => {
+                if (res.ok) {
+                    ipcRenderer.send('mainWindow:create', ws_url);
+                }
+                else {
+                    document.querySelector('.error').innerHTML = "サーバに接続できませんでした";
                     document.querySelector('.error').style.display = "block";
                 }
-            })
-            .catch(error => {
-                document.querySelector('.error').innerHTML = "サーバに接続できません";
+            }).catch((e) => {
+                document.querySelector('.error').innerHTML = "サーバに接続できませんでした";
                 document.querySelector('.error').style.display = "block";
             });
         });

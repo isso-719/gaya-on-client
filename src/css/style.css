@@ -10,25 +10,54 @@
 body {
     width: 100%;
     height: 100%;
+    background: rgba(0,0,0,0);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
 }
 
-.fuwafuwa {
+.text {
+    font-size: 30px;
+    color: #000;
+    -webkit-text-stroke: 2px #aaa;
+    text-stroke: 2px #aaa;
+    font-weight: bold;
+    animation: textAnimation linear 7s;
+    position: absolute;
     will-change: transform, opacity, animation;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    animation: fuwafuwa 1s;
-    width: 70px;
-    height: 70px;
+}
+
+@keyframes textAnimation {
+    0% {
+        transform:translate(0, 0) ;
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform:translate(calc(-100vw - 110%), 0);
+        opacity: 0;
+    }
+}
+
+.emoji {
+    will-change: transform, opacity, animation;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    animation: emojiAnimation 2s ease-in-out;
+    width: 50px;
+    height: 50px;
     position: absolute;
     bottom: -50px;
     opacity: 0;
+    font-size: 50px;
 }
 
-.heart {
-    background: url(../img/heart.png) no-repeat center center / 60px auto;
-}
-
-@keyframes fuwafuwa {
+@keyframes emojiAnimation {
     0% {
         transform:translate(0, 50px) ;
         opacity: 1;
@@ -37,7 +66,7 @@ body {
         opacity: 1;
     }
     100% {
-        transform:translate(0, -200px);
+        transform:translate(0, -300px);
         opacity: 0;
         display: none;
     }

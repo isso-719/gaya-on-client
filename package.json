@@ -1,42 +1,31 @@
 {
-  "name": "gaya-on",
+  "name": "gaya-on-client",
+  "productName": "gaya-on-client",
   "version": "1.0.0",
-  "main": "src/main.js",
+  "description": "My Electron application description",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron ./src",
-    "build-macOS": "npx electron-builder --mac --x64",
-    "build-windows": "npx electron-builder --win --x64",
-    "build-macOS-nonInstaller": "npx electron-builder --mac --x64 --dir",
-    "build-windows-nonInstaller": "npx electron-builder --win --x64 --dir"
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\""
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "build": {
-    "appId": "cc.isso.gaya-on",
-    "productName": "Gaya On!",
-    "files": [
-      "src/"
-    ],
-    "mac": {
-      "target": "dmg",
-      "icon": "src/icon.png"
-    },
-    "win": {
-      "target": "nsis",
-      "icon": "src/icon.png"
-    },
-    "nsis": {
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": true
-    }
+  "author": {
+    "name": "isso-719",
+    "email": "i@kazukiisogai.net"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0"
   },
   "devDependencies": {
-    "electron": "^13.1.7"
-  },
-  "description": "",
-  "dependencies": {
-    "jquery": "^3.6.0"
+    "@electron-forge/cli": "^6.0.5",
+    "@electron-forge/maker-deb": "^6.0.5",
+    "@electron-forge/maker-rpm": "^6.0.5",
+    "@electron-forge/maker-squirrel": "^6.0.5",
+    "@electron-forge/maker-zip": "^6.0.5",
+    "electron": "23.1.1"
   }
 }
