@@ -24,9 +24,11 @@ function showEmoji(body) {
     let windowWidth = window.innerWidth;
     let sideRand = Math.floor(Math.random() * windowWidth);
 
+    let encodedEmoji = String.fromCodePoint(parseInt(body, 16));
+
     const emoji = document.createElement('p');
     emoji.classList.add('emoji');
-    emoji.textContent = body;
+    emoji.textContent = encodedEmoji;
     emoji.style.left = sideRand + 'px';
     document.body.appendChild(emoji);
 }
