@@ -28,3 +28,11 @@ npm コマンドで起動します。
 ```bash
 npm start
 ```
+
+### リリース
+
+npm コマンドでリリースします。
+
+```bash
+npm release
+```
