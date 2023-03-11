@@ -9,7 +9,7 @@ if [ $answer != "y" ]; then
 fi
 
 # GitHub に push する
-echo "バージョンを入力してください (例: v1.0.0)
+echo "バージョンを入力してください (例: v1.0.0)"
 read version
 git add .
 git commit -m $version
