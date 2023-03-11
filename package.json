@@ -2,7 +2,7 @@
   "name": "gaya-on-client",
   "productName": "gaya-on-client",
   "version": "v1.0.0",
-  "description": "My Electron application description",
+  "description": "This is GayaON! client application.",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
