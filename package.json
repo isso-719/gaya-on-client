@@ -1,7 +1,7 @@
 {
   "name": "gaya-on-client",
   "productName": "gaya-on-client",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "This is GayaON! client application.",
   "main": "src/index.js",
   "scripts": {
